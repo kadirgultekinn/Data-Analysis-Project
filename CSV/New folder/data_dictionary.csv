@@ -1,0 +1,87 @@
+file,column,unit,source,description
+gold_drivers_daily.csv,date,YYYY-MM-DD,Yahoo Finance,COMEX gold futures trading day. One row per day.
+gold_drivers_daily.csv,year,year,Derived,Calendar year of date.
+gold_drivers_daily.csv,month,1-12,Derived,Calendar month of date.
+gold_drivers_daily.csv,day_of_week,name,Derived,Weekday name of date.
+gold_drivers_daily.csv,gold_open,USD/oz,Yahoo Finance,"Gold futures (GC=F, front month) opening price. Empty on days where Yahoo kept only a closing price (mostly before 2008)."
+gold_drivers_daily.csv,gold_high,USD/oz,Yahoo Finance,"Gold futures daily high. Raised to at least max(open, close) where the raw bar was inconsistent."
+gold_drivers_daily.csv,gold_low,USD/oz,Yahoo Finance,"Gold futures daily low. Lowered to at most min(open, close) where the raw bar was inconsistent."
+gold_drivers_daily.csv,gold_close,USD/oz,Yahoo Finance,Gold futures daily close. This is the main target column.
+gold_drivers_daily.csv,gold_volume,contracts,Yahoo Finance,Gold futures volume for the front-month contract. Empty where Yahoo reports zero.
+gold_drivers_daily.csv,silver_close,USD/oz,Yahoo Finance,Silver futures (SI=F) close.
+gold_drivers_daily.csv,platinum_close,USD/oz,Yahoo Finance,Platinum futures (PL=F) close.
+gold_drivers_daily.csv,palladium_close,USD/oz,Yahoo Finance,Palladium futures (PA=F) close.
+gold_drivers_daily.csv,copper_close,USD/lb,Yahoo Finance,Copper futures (HG=F) close.
+gold_drivers_daily.csv,brent_close,USD/barrel,Yahoo Finance,Brent crude futures (BZ=F) close. Starts 2007-07-30.
+gold_drivers_daily.csv,wti_close,USD/barrel,Yahoo Finance,WTI crude futures (CL=F) close. Negative on 2020-04-20 (real market event).
+gold_drivers_daily.csv,dxy_close,index,Yahoo Finance,US Dollar Index (DX-Y.NYB) close.
+gold_drivers_daily.csv,usd_cny,CNY per USD,Yahoo Finance,US dollar to Chinese yuan rate. Starts 2001-06-25.
+gold_drivers_daily.csv,usd_inr,INR per USD,Yahoo Finance,US dollar to Indian rupee rate. Starts 2003-12-01.
+gold_drivers_daily.csv,sp500_close,index points,Yahoo Finance,S&P 500 index close.
+gold_drivers_daily.csv,vix_close,index points,Yahoo Finance,CBOE VIX volatility index close.
+gold_drivers_daily.csv,bitcoin_close,USD,Yahoo Finance,Bitcoin price (BTC-USD) on the same date. Starts 2014-09-17.
+gold_drivers_daily.csv,gld_close,USD/share,Yahoo Finance,"SPDR Gold Shares ETF (GLD) close, not adjusted. Starts 2004-11-18."
+gold_drivers_daily.csv,gdx_close,USD/share,Yahoo Finance,"VanEck Gold Miners ETF (GDX) close, not adjusted. Starts 2006-05-22."
+gold_drivers_daily.csv,gld_volume,shares,Yahoo Finance,"GLD trading volume, a rough proxy for investor flows into gold."
+gold_drivers_daily.csv,us_2y_yield,percent,FRED,2-year US Treasury constant-maturity yield (DGS2).
+gold_drivers_daily.csv,us_10y_yield,percent,FRED,10-year US Treasury constant-maturity yield (DGS10).
+gold_drivers_daily.csv,us_10y_real_yield,percent,FRED,"10-year TIPS real yield (DFII10), the classic opportunity cost of holding gold. Starts 2003-01-02."
+gold_drivers_daily.csv,breakeven_inflation_10y,percent,FRED,10-year breakeven inflation rate (T10YIE). Starts 2003-01-02.
+gold_drivers_daily.csv,inflation_expectation_5y5y,percent,FRED,"5-year, 5-year forward inflation expectation (T5YIFR). Starts 2003-01-02."
+gold_drivers_daily.csv,fed_funds_effective,percent,FRED,Effective federal funds rate (DFF).
+gold_drivers_daily.csv,us_policy_uncertainty,index,FRED,"Daily US Economic Policy Uncertainty index, Baker, Bloom and Davis (USEPUINDXD). Noisy day to day; smooth before use."
+gold_drivers_daily.csv,fed_target_lower,percent,FRED,Lower bound of the Fed funds target range (DFEDTARL). Before 2008-12-16 the single target (DFEDTAR).
+gold_drivers_daily.csv,fed_target_upper,percent,FRED,Upper bound of the Fed funds target range (DFEDTARU). Before 2008-12-16 the single target (DFEDTAR).
+gold_drivers_daily.csv,gpr_index,"index, 1985-2019 = 100",Caldara & Iacoviello GPR,"Daily Geopolitical Risk index, based on the share of newspaper articles about geopolitical tensions."
+gold_drivers_daily.csv,gpr_acts,index,Caldara & Iacoviello GPR,"GPR sub-index for geopolitical acts (wars, attacks that happened)."
+gold_drivers_daily.csv,gpr_threats,index,Caldara & Iacoviello GPR,"GPR sub-index for geopolitical threats (war threats, tensions)."
+gold_drivers_daily.csv,gold_return_pct,percent,Derived,Daily percent change of gold_close.
+gold_drivers_daily.csv,gold_log_return,log points,Derived,Daily log return of gold_close.
+gold_drivers_daily.csv,gold_volatility_20d,"percent, annualised",Derived,20-day rolling standard deviation of gold_log_return times sqrt(252).
+gold_drivers_daily.csv,gold_ma_50,USD/oz,Derived,50-day simple moving average of gold_close.
+gold_drivers_daily.csv,gold_ma_200,USD/oz,Derived,200-day simple moving average of gold_close.
+gold_drivers_daily.csv,gold_all_time_high,USD/oz,Derived,Highest gold_close up to and including this day (from 2000-08-30).
+gold_drivers_daily.csv,gold_drawdown_pct,percent,Derived,Percent below gold_all_time_high. 0 on record days.
+gold_drivers_daily.csv,is_record_close,0/1,Derived,1 if gold_close set a new all-time high for this file.
+gold_drivers_daily.csv,gold_silver_ratio,ratio,Derived,Ounces of silver one ounce of gold buys (gold_close / silver_close).
+gold_drivers_daily.csv,gold_oil_ratio,ratio,Derived,Barrels of Brent one ounce of gold buys (gold_close / brent_close).
+gold_drivers_daily.csv,gold_in_inr,INR/oz,Derived,Gold price in Indian rupees (gold_close x usd_inr).
+gold_drivers_daily.csv,gold_in_cny,CNY/oz,Derived,Gold price in Chinese yuan (gold_close x usd_cny).
+gold_drivers_daily.csv,event_name,text,Curated,Name of the major event(s) whose first market reaction falls on this day; several events are joined with ' | '.
+gold_drivers_daily.csv,event_category,text,Curated,"Category of each event in event_name: geopolitical, monetary_policy, financial_crisis, trade_currency, pandemic or market."
+gold_drivers_daily.csv,event_flag,0/1,Curated,1 if at least one event from gold_events_timeline.csv reacts on this day.
+gold_events_timeline.csv,date,YYYY-MM-DD,Curated,Calendar date the event happened or was announced.
+gold_events_timeline.csv,reaction_date,YYYY-MM-DD,Derived,"First gold trading day whose close can reflect the event: the same day, or the next trading day if the event was on a weekend, a holiday or after the US close."
+gold_events_timeline.csv,event_name,text,Curated,Short event name.
+gold_events_timeline.csv,category,text,Curated,"geopolitical, monetary_policy, financial_crisis, trade_currency, pandemic or market."
+gold_events_timeline.csv,region,text,Curated,Main region involved.
+gold_events_timeline.csv,description,text,Curated,One-sentence factual description.
+gold_events_timeline.csv,after_us_close,0/1,Curated,"1 if the news broke after the US gold settlement, so the reaction is on the next trading day."
+gold_events_timeline.csv,gold_close_before,USD/oz,Derived,Gold close on the trading day before reaction_date.
+gold_events_timeline.csv,gold_change_1d_pct,percent,Derived,Gold change from gold_close_before to the close on reaction_date.
+gold_events_timeline.csv,gold_change_5d_pct,percent,Derived,Gold change from gold_close_before to the close 5 trading days later (counting reaction_date as day 1).
+gold_events_timeline.csv,gold_change_20d_pct,percent,Derived,Gold change from gold_close_before to the close 20 trading days later. Empty if 20 days have not passed yet.
+gold_events_timeline.csv,source_url,URL,Curated,Reference for the event.
+fed_rate_decisions.csv,effective_date,YYYY-MM-DD,FRED,Date the new Fed target took effect in FRED. Since 2008 this is usually the day after the FOMC announcement; before that it is usually the announcement day.
+fed_rate_decisions.csv,target_lower,percent,FRED,New lower bound of the target range (single target before 2008-12-16).
+fed_rate_decisions.csv,target_upper,percent,FRED,New upper bound of the target range (single target before 2008-12-16).
+fed_rate_decisions.csv,change_bp,basis points,Derived,"Size of the change; positive is a hike, negative a cut."
+fed_rate_decisions.csv,direction,text,Derived,hike or cut.
+fed_rate_decisions.csv,gold_change_20d_pct,percent,Derived,Gold change from the close before effective_date to 20 trading days later. Empty before gold data starts or if 20 days have not passed.
+gold_macro_monthly.csv,month,YYYY-MM,Derived,Calendar month.
+gold_macro_monthly.csv,gold_avg,USD/oz,Derived,Average gold_close over the month.
+gold_macro_monthly.csv,gold_close,USD/oz,Derived,Last gold_close of the month.
+gold_macro_monthly.csv,silver_avg,USD/oz,Derived,Average silver_close over the month.
+gold_macro_monthly.csv,brent_avg,USD/barrel,Derived,Average brent_close over the month.
+gold_macro_monthly.csv,dxy_avg,index,Derived,Average dxy_close over the month.
+gold_macro_monthly.csv,us_10y_real_yield_avg,percent,Derived,Average 10-year TIPS real yield over the month.
+gold_macro_monthly.csv,fed_funds_effective_avg,percent,Derived,Average effective Fed funds rate over the month.
+gold_macro_monthly.csv,gpr_index_avg,index,Caldara & Iacoviello GPR,Average daily GPR index over all calendar days of the month.
+gold_macro_monthly.csv,us_policy_uncertainty_avg,index,FRED,Average daily US Economic Policy Uncertainty index over the month.
+gold_macro_monthly.csv,cpi_index,"index, 1982-84 = 100",FRED,"US CPI for all urban consumers, seasonally adjusted (CPIAUCSL). Values are for the reference month, not the release date."
+gold_macro_monthly.csv,m2_money_supply_bn,USD billions,FRED,"US M2 money stock, seasonally adjusted (M2SL)."
+gold_macro_monthly.csv,unemployment_rate,percent,FRED,US unemployment rate (UNRATE).
+gold_macro_monthly.csv,cpi_inflation_yoy_pct,percent,Derived,Year-on-year change of cpi_index.
+gold_macro_monthly.csv,m2_growth_yoy_pct,percent,Derived,Year-on-year change of m2_money_supply_bn.
+gold_macro_monthly.csv,gold_avg_real,"USD/oz, latest-CPI dollars",Derived,gold_avg deflated by cpi_index into dollars of the latest CPI month in the file.
+gold_macro_monthly.csv,gold_return_month_pct,percent,Derived,Percent change of gold_close from the previous month.
